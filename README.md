@@ -1,2 +1,6 @@
 # Proyecto usando Jetpack Compose
-Iniciando proyecto
+- Alegre Linares Rosario Lohana
+- Alfaro Zapana Estefany Reyna
+- Ancco Ruelas Alexis Dario
+- Vera Mamani Jose Miguel
+
