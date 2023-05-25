@@ -19,7 +19,6 @@ class MainActivity : ComponentActivity() {
         //window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContent {
             Material3ComposeTheme {
-                LoginApplication()
                 val database = Room.databaseBuilder(this, UserDataBase::class.java, "product_db").build()
                 val dao = database.dao
                 val viewModel by viewModels<HomeViewModel>(factoryProducer = {
@@ -29,19 +28,23 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 })
+                LoginApplication(viewModel)
                 //HomeScreen(viewModel)
             }
         }
     }
 
     @Composable
-    fun LoginApplication(){
+    fun LoginApplication(viewModel: HomeViewModel){
         val navController = rememberNavController()
 
         NavHost(navController = navController, startDestination = "login_page", builder = {
             composable("login_page", content = { LoginPage(navController = navController) })
-            composable("register_page", content = { RegisterPage(navController = navController) })
+            composable("register_page", content = { RegisterPage(navController = navController,viewModel) })
             composable("reset_page", content = { ResetPage(navController = navController) })
+            composable("main_page", content = { MainPage(navController = navController) })
+            composable("denuncias_register", content = { RegistrarDenuncia(navController = navController) })
+            composable("denuncias_list", content = { VerDenuncia(navController = navController) })
         })
     }
 }

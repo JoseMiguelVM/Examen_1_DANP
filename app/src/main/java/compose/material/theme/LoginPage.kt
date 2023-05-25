@@ -100,20 +100,23 @@ fun LoginPage(navController: NavController) {
 
 
                 Spacer(modifier = Modifier.padding(10.dp))
-               /* Button(
-                    onClick = {},
+               Button(
+                    onClick = { navController.navigate("main_page"){
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true }
+                              },
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
                         .height(50.dp)
                 ) {
                     Text(text = "Login", fontSize = 20.sp)
-                }*/
-                GradientButton(
+                }
+                /*GradientButton(
                     gradientColors = gradientColor,
                     cornerRadius = cornerRadius,
                     nameButton = "Iniciar",
                     roundedCornerShape = RoundedCornerShape(topStart = 30.dp,bottomEnd = 30.dp)
-                )
+                )*/
 
                 Spacer(modifier = Modifier.padding(10.dp))
                 androidx.compose.material3.TextButton(onClick = {

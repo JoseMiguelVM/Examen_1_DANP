@@ -13,11 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun HomeScreen(
-    viewModel: HomeViewModel
-) {
+fun HomeScreen(viewModel: HomeViewModel) {
     val state = viewModel.state
 
     Column(
@@ -25,7 +24,7 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Text(text = "Usuarios", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+        /*Text(text = "Usuarios", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
         TextField(
             value = state.userName,
             onValueChange = { viewModel.changeName(it) },
@@ -48,7 +47,7 @@ fun HomeScreen(
         )
         Button(onClick = { viewModel.createUser() }) {
             Text(text = "Agregar Usuario")
-        }
+        }*/
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(state.users) {
                 UserItem(user = it, modifier = Modifier.fillMaxWidth(), onEdit = {

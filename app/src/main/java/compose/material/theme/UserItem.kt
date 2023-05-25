@@ -25,7 +25,9 @@ fun UserItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = "${user.name} ${user.number} ${user.email}")
+        Text(text = "Nombre: ${user.name}")
+        Text(text = "Teléfono: ${user.number}")
+        Text(text = "Email ${user.email}")
         IconButton(onClick = onEdit) {
             Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit")
         }

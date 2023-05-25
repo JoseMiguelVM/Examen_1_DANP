@@ -37,7 +37,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun RegisterPage(navController: NavController) {
+fun RegisterPage(navController: NavController, viewModel: HomeViewModel) {
+
+    val state = viewModel.state
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -88,7 +91,7 @@ fun RegisterPage(navController: NavController) {
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.primary,
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                /*Spacer(modifier = Modifier.height(8.dp))
                 RegisterName()
 
                 Spacer(modifier = Modifier.padding(3.dp))
@@ -98,11 +101,42 @@ fun RegisterPage(navController: NavController) {
                 RegisterEmail()
 
                 Spacer(modifier = Modifier.padding(3.dp))
-                RegisterPassword()
+                RegisterPassword()*/
 
                 //Spacer(modifier = Modifier.padding(3.dp))
                 //RegisterPasswordConfirm()
 
+                Spacer(modifier = Modifier.padding(5.dp))
+                TextField(
+                    value = state.userName,
+                    onValueChange = { viewModel.changeName(it) },
+                    placeholder = { Text(text = "Nombre de usuario") }
+                )
+                TextField(
+                    value = state.userNumber,
+                    onValueChange = { viewModel.changeNumber(it) },
+                    placeholder = { Text(text = "Telefono") }
+                )
+                TextField(
+                    value = state.userEmail,
+                    onValueChange = { viewModel.changeEmail(it) },
+                    placeholder = { Text(text = "Email") }
+                )
+                TextField(
+                    value = state.userPassword,
+                    onValueChange = { viewModel.changePassword(it) },
+                    placeholder = { Text(text = "Contraseña") }
+                )
+                Spacer(modifier = Modifier.padding(5.dp))
+                Button(onClick = {
+                    navController.navigate("login_page"){
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                    }
+                    viewModel.createUser()
+                }) {
+                    Text(text = "Crear Cuenta")
+                }
 
                 val gradientColor = listOf(Color(0xFF484BF1), Color(0xFF673AB7))
                 val cornerRadius = 16.dp
@@ -117,12 +151,12 @@ fun RegisterPage(navController: NavController) {
                 ) {
                     Text(text = "Login", fontSize = 20.sp)
                 }*/
-                GradientButton(
+                /*GradientButton(
                     gradientColors = gradientColor,
                     cornerRadius = cornerRadius,
                     nameButton = "Crear Cuenta",
                     roundedCornerShape = RoundedCornerShape(topStart = 30.dp,bottomEnd = 30.dp)
-                )
+                )*/
 
                 Spacer(modifier = Modifier.padding(10.dp))
                 androidx.compose.material3.TextButton(onClick = {
