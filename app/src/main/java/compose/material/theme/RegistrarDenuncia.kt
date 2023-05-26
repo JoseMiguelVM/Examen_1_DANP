@@ -5,10 +5,8 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.MaterialTheme
@@ -16,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -26,9 +23,8 @@ import java.time.format.DateTimeFormatter
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun RegistrarDenuncia(navController: NavController) {
+fun RegistrarDenuncia(navController: NavController, viewModel: DenunciasViewModel) {
 
     Scaffold(
         topBar = {
@@ -54,13 +50,15 @@ fun RegistrarDenuncia(navController: NavController) {
                 }
         }
     ){
-        RegistrarDenunciaContent(navController)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            RegistrarDenunciaContent(navController,viewModel)
+        }
     }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun RegistrarDenunciaContent(navController: NavController){
+fun RegistrarDenunciaContent(navController: NavController, viewModel: DenunciasViewModel){
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -69,6 +67,7 @@ fun RegistrarDenunciaContent(navController: NavController){
     ) {
 
         val today = LocalDate.now()
+        val state = viewModel.state
         Box(
             modifier = Modifier
         ) {
@@ -120,8 +119,8 @@ fun RegistrarDenunciaContent(navController: NavController){
                 )
                 Spacer(modifier = Modifier.padding(5.dp))*/
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {  },
+                    value = state.denunciaTitulo,
+                    onValueChange = { viewModel.changeTitulo(it) },
                     label = { Text("Tipo de Denuncia") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -130,8 +129,8 @@ fun RegistrarDenunciaContent(navController: NavController){
                 Spacer(modifier = Modifier.padding(5.dp))
 
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {  },
+                    value = state.denunciaDescripcion,
+                    onValueChange = { viewModel.changeDescripcion(it) },
                     label = { Text("Descripción") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -141,6 +140,7 @@ fun RegistrarDenunciaContent(navController: NavController){
                 Spacer(modifier = Modifier.padding(6.dp))
 
                 Button(onClick = {
+                    viewModel.createDenuncia()
 
                 }) {
                     Text(text = "Registrar Denuncia")
