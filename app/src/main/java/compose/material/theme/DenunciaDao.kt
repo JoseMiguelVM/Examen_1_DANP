@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DenunciaDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDenuncia(denuncia: Denuncia)
 

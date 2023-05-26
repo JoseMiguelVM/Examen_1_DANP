@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
             composable("reset_page", content = { ResetPage(navController = navController) })
             composable("main_page", content = { MainPage(navController = navController) })
             composable("denuncias_register", content = { RegistrarDenuncia(navController = navController,viewModel1) })
-            composable("denuncias_list", content = { VerDenuncia(navController = navController) })
+            composable("denuncias_list", content = { VerDenuncia(viewModel1,navController = navController)})
         })
     }
 }

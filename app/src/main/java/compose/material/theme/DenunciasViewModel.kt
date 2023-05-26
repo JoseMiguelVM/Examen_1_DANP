@@ -3,8 +3,11 @@ package compose.material.theme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.*
@@ -13,7 +16,8 @@ class DenunciasViewModel(
     private val dao: DenunciaDao
 ): ViewModel() {
     var state by mutableStateOf(DenunciaState())
-    private set
+    //val allDenuncia = MutableLiveData<List<Denuncia>>()
+
 
     init {
         viewModelScope.launch {
@@ -62,4 +66,5 @@ class DenunciasViewModel(
         )
     }
 
+    val allDenuncias: Flow<List<Denuncia>> = dao.getAllDenuncia()
 }
